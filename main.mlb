@@ -1,0 +1,58 @@
+local
+  basis l4 =
+    bas
+      (* $/basis.cm ====> *) $(SML_LIB)/basis/basis.mlb
+    end
+in
+local
+   $(SML_LIB)/basis/pervasive.mlb
+   local
+      open l4
+   in
+      structure gs_0 = String
+   end
+   local
+      structure String = gs_0
+      utils.sml
+   in
+      structure gs_1 = Utils
+   end
+   local
+      open l4
+   in
+      structure gs_2 = List
+   end
+   local
+      structure List = gs_2
+      structure String = gs_0
+      structure Utils = gs_1
+      unify.sml
+   in
+      structure gs_3 = Unify
+   end
+   local
+      open l4
+   in
+      structure gs_4 = Int
+   end
+   local
+      structure Unify = gs_3
+      matching.sml
+   in
+      structure gs_5 = Matching
+   end
+   local
+      structure Int = gs_4
+      structure List = gs_2
+      structure Matching = gs_5
+      rewriting.sml
+   in
+      structure gs_6 = Rewriting
+   end
+in
+   structure Matching = gs_5
+   structure Rewriting = gs_6
+   structure Unify = gs_3
+   structure Utils = gs_1
+end
+end
