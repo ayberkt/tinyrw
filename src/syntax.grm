@@ -1,8 +1,11 @@
 open Syntax
 
-val index : int ref = ref 0
+val seen : string list ref = ref []
 
-val fresh = fn () => let val r = !index in (index := (!index) + 1; r) end
+fun getIndex s =
+  case List.findi (fn (_, p) => p = s) (!seen) of
+    SOME (i, _) => i
+  | NONE => let val r = List.length (!seen) in (seen := (!seen)@[s]; r) end
 
 %%
 %header (functor RewriteLrValsFun (structure Token : TOKEN))
@@ -46,6 +49,6 @@ rule : term REWRITES term                                      ((term1, term2))
 termlist : term                                                        ([term])
          | term COMMA termlist                                 (term::termlist)
 
-term : UIDENT                                            (V (UIDENT, fresh ()))
+term : UIDENT                                     (V (UIDENT, getIndex UIDENT))
      | LIDENT LPAREN termlist RPAREN                      ($(LIDENT, termlist))
      | LIDENT                                                   ($(LIDENT, []))

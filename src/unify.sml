@@ -9,7 +9,7 @@ structure Unify = struct
 
   type     subst = (vname * term) list
 
-  fun toString (V (s, i)) = s
+  fun toString (V (s, i)) = s ^ "@" ^ Int.toString i
     | toString (f $ ts) =
         f ^ "(" ^ intercalate ", " (List.map toString ts) ^ ")"
 
