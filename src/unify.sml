@@ -10,11 +10,15 @@ structure Unify = struct
 
   type     subst = (vname * term) list
 
+  val bright = fn c => C.format (C.Bright, c)
+
   fun toString (V (s, i)) =
         C.format (C.Bright, C.Cyan) (s ^ "@" ^ Int.toString i)
     | toString (f $ ts) =
         (C.format (C.Bright, C.Green) f)
-        ^ "(" ^ intercalate ", " (List.map toString ts) ^ ")"
+        ^ bright C.White "("
+          ^ intercalate ", " (List.map toString ts)
+        ^ bright C.White ")"
 
   fun indom x s = List.exists (fn (y, _) => x = y) s
 
