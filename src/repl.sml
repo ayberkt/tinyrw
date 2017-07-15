@@ -58,7 +58,7 @@ structure REPL = struct
                 case result of
                   Rule (lhs, rhs) =>
                     (addRule (lhs, rhs);
-                     printLn ("Added rule: " ^ RW.showRule (lhs, rhs)))
+                     printLn ("New rule: " ^ RW.showRule (lhs, rhs) ^ "."))
                 | Norm tm => (printLn o toString) (RW.norm (!rules) tm)
               end
               handle err =>
