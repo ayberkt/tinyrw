@@ -14,6 +14,7 @@ structure Unify = struct
 
   fun toString (V (s, i)) =
         C.format (C.Bright, C.Cyan) (s ^ "@" ^ Int.toString i)
+    | toString (c $ []) = C.format (C.Bright, C.Magenta) c
     | toString (f $ ts) =
         (C.format (C.Bright, C.Green) f)
         ^ bright C.White "("
