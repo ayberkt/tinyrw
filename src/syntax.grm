@@ -1,0 +1,51 @@
+open Syntax
+
+val index : int ref = ref 0
+
+val fresh = fn () => let val r = !index in (index := (!index) + 1; r) end
+
+%%
+%header (functor RewriteLrValsFun (structure Token : TOKEN))
+
+%term EOF
+   | LIDENT of string
+   | UIDENT of string
+   | CMDRULE
+   | CMDNORM
+   | REWRITES
+   | COMMA
+   | LPAREN
+   | RPAREN
+
+%nonterm start of command
+      | command of command
+      | rule of term * term
+      | termlist of term list
+      | term of term
+
+%verbose
+%pos (string -> Coord.t)
+%start start
+%eop EOF
+%noshift EOF
+%name Rewrite
+%nonassoc CMDRULE
+%nonassoc CMDNORM
+%nonassoc LPAREN RPAREN
+%nonassoc COMMA
+%arg (fname) : string
+%%
+
+start : command                                                       (command)
+
+command : CMDRULE rule                                              (Rule rule)
+        | CMDNORM term                                              (Norm term)
+
+rule : term REWRITES term                                      ((term1, term2))
+
+termlist : term                                                        ([term])
+         | term COMMA termlist                                 (term::termlist)
+
+term : UIDENT                                            (V (UIDENT, fresh ()))
+     | LIDENT LPAREN termlist RPAREN                      ($(LIDENT, termlist))
+     | LIDENT                                                   ($(LIDENT, []))

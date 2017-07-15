@@ -41,6 +41,4 @@ structure Rewriting = struct
 
   fun const tm = tm $ []
 
-  val _ = run ("foo" $ [const "zero", const "zero", const "zero"])
-
 end

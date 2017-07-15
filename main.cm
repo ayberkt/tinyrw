@@ -1,6 +1,12 @@
 Group is
   $/basis.cm
-  utils.sml
-  unify.sml
-  matching.sml
-  rewriting.sml
+  $/ml-yacc-lib.cm
+  lib/cmlib.cm
+  src/syntax.grm
+  src/syntax.lex
+  src/utils.sml
+  src/unify.sml
+  src/matching.sml
+  src/rewriting.sml
+  src/syntax.sml
+  src/repl.sml
