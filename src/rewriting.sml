@@ -1,5 +1,6 @@
 structure Rewriting = struct
   open Matching
+  structure C = Color
   infix 3 $
 
   exception NORM
@@ -15,6 +16,6 @@ structure Rewriting = struct
         in norm R (rewrite R u) handle NORM => u end
 
   fun showRule (l, r) =
-    toString l ^ "  --->  " ^ toString r ^ "\n"
+    toString l ^ "  --->  " ^ toString r
 
 end

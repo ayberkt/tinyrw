@@ -2,6 +2,7 @@ structure Unify = struct
   open Utils
   structure L = List
   structure S = String
+  structure C = Color
 
   type     vname = string * int
   datatype term  = V of vname | $ of string * term list
@@ -9,9 +10,11 @@ structure Unify = struct
 
   type     subst = (vname * term) list
 
-  fun toString (V (s, i)) = s ^ "@" ^ Int.toString i
+  fun toString (V (s, i)) =
+        C.format (C.Bright, C.Cyan) (s ^ "@" ^ Int.toString i)
     | toString (f $ ts) =
-        f ^ "(" ^ intercalate ", " (List.map toString ts) ^ ")"
+        (C.format (C.Bright, C.Green) f)
+        ^ "(" ^ intercalate ", " (List.map toString ts) ^ ")"
 
   fun indom x s = List.exists (fn (y, _) => x = y) s
 
