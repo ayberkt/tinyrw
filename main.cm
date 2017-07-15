@@ -2,6 +2,7 @@ Group is
   $/basis.cm
   $/ml-yacc-lib.cm
   lib/cmlib.cm
+  lib/sml-colors/colors.cm
   src/syntax.grm
   src/syntax.lex
   src/utils.sml
