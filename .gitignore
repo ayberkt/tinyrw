@@ -1,6 +1,6 @@
 .cm
 *.x86-darwin
-src/syntax.grm.desc
-src/syntax.grm.sig
-src/syntax.grm.sml
-src/syntax.lex.sml
+src/tinyrw.grm.desc
+src/tinyrw.grm.sig
+src/tinyrw.grm.sml
+src/tinyrw.lex.sml
