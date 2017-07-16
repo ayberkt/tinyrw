@@ -3,8 +3,8 @@ Group is
   $/ml-yacc-lib.cm
   lib/cmlib.cm
   lib/sml-colors/colors.cm
-  src/syntax.grm
-  src/syntax.lex
+  src/tinyrw.grm
+  src/tinyrw.lex
   src/utils.sml
   src/unify.sml
   src/matching.sml
