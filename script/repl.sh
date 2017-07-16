@@ -1,1 +1,1 @@
-sml @SMLload=repl.x86-darwin
+sml @SMLload=repl
