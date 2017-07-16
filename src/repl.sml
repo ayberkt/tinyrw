@@ -5,6 +5,7 @@ structure REPL = struct
 
   structure RewriteLrVals =
     RewriteLrValsFun(structure Token = LrParser.Token)
+  open RewriteLrVals
 
   structure RewriteLex =
     RewriteLexFun(structure Tokens = RewriteLrVals.Tokens)
@@ -52,7 +53,7 @@ structure REPL = struct
           NONE => 0
         | SOME str =>
             ((let
-                val lexer = RewriteParser.makeLexer (stringreader (Option.valOf input)) "-"
+                val lexer = RewriteParser.makeLexer (stringreader (Option.valOf input)) "stdin"
                 val (result, _) = RewriteParser.parse (1, lexer, error "-", "-")
               in
                 case result of
@@ -60,10 +61,9 @@ structure REPL = struct
                     (addRule (lhs, rhs);
                      printLn ("New rule: " ^ RW.showRule (lhs, rhs) ^ "."))
                 | Norm tm => (printLn o toString) (RW.norm (!rules) tm)
-              end
-              handle err =>
-                print ("Error: " ^ exnMessage err ^ "\n\n"));
-                loop ())
+              end)
+              handle ParseError (p, s) =>
+                printLn ("Error: " ^ Pos.toString p); loop ())
       end
 
     fun main (name, args) = loop ()
@@ -71,4 +71,4 @@ structure REPL = struct
     val _ = SMLofNJ.exportFn ("repl", main)
   end
 
-end
+  end
